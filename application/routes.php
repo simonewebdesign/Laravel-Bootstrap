@@ -1,4 +1,10 @@
 <?php
+// Define some constants
+define('COMPANY_NAME','Company Name');
+define('CONTACT_EMAIL','davzie@davzie.com');
+define('CONTACT_NAME','David Thorpe');
+
+define('TECHNICAL_EMAIL','davzie@davzie.com');
 
 Route::get('admin/setup',function(){
 	if(Setup::setup_complete()){
@@ -51,7 +57,8 @@ Route::get('admin/dashboard', 'admin.dash@index');
 Route::any('admin/(:any?)', array('defaults' => 'index', 'uses' => 'admin.dash@(:1)'));
 
 // Frontend routing
-Route::get('/', function(){ return View::make('home.index'); });
+Route::any('(:any)', array('uses' => 'page@index'));
+Route::any('/', 'page@index');
 
 
 

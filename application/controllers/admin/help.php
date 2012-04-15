@@ -23,7 +23,7 @@ class Admin_Help_Controller extends Admin_Controller
             // Construct the message
             $message = Swift_Message::newInstance('Message From Website')
             ->setFrom(array($this->data['user']->email => $this->data['user']->fullname))
-            ->setTo(array('david@koki.co'=>'Framework Support For '.COMPANY_NAME))
+            ->setTo(array(TECHNICAL_EMAIL=>'Framework Support For '.COMPANY_NAME))
             ->setBody('<p><strong>'.$this->data['user']->fullname.' has emailed you:</strong></p>
             <q>'.Input::get('issue').'</q>
             <p><strong>Email Address: </strong> '.$this->data['user']->email.'</p>

@@ -103,12 +103,12 @@ class View implements ArrayAccess {
 	}
 
 	/**
-	 * Get the path to a given view on disk.
-	 *
-	 * @param  string  $view
-	 * @return string
+	 * Allows people to check if a view passed in exists, handy for certain types of CMS development
+	 * @param  string  $view        	The view name (ex. site.home)
+	 * @param  boolean $return_path 	Setting to TRUE will return the path found if it exists
+	 * @return string / boolean
 	 */
-	protected function path($view)
+	public static function exists($view, $return_path = false)
 	{
 		list($bundle, $view) = Bundle::parse($view);
 
@@ -121,11 +121,27 @@ class View implements ArrayAccess {
 
 		if ( ! is_null($path))
 		{
+			return $return_path ? $path : true;
+		}
+		return false;
+	}
+
+	/**
+	 * Get the path to a given view on disk.
+	 *
+	 * @param  string  $view
+	 * @return string
+	 */
+	protected function path($view)
+	{
+		if ($path = $this->exists($view,true))
+		{
 			return $path;
 		}
 
 		throw new \Exception("View [$view] doesn't exist.");
 	}
+	
 
 	/**
 	 * Get the path to a view using the default folder convention.

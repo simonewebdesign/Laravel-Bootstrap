@@ -14,10 +14,6 @@ class Admin_Controller extends Base_Controller {
 
         // Get the user details from when they logged in / old sessions
     	$this->data['user'] = Auth::user();
-
-        // Define some constants
-    	define('COMPANY_NAME','[Company Name]');
-    	define('CONTACT_EMAIL','[example@example.com]');
     }
 
     /**
