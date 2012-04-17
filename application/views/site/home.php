@@ -10,7 +10,7 @@
 	<? endif; ?>
 </head>
 <body>
-
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 	<?
 		if($page){
 			if($page->section){
@@ -27,18 +27,6 @@
 			}
 		}
 	?>
-	Test
-	<?
-	echo Form::open('/');
-	echo Form::token();
-	echo '<p>'.Form::label('your_name','Your Name').Form::text('your_name',Input::old('your_name')).'</p>';
-	echo '<p>'.Form::label('email','Your Email').Form::text('email',Input::old('email')).'</p>';
-	echo '<p>'.Form::label('number','Your Number').Form::text('number',Input::old('number')).'</p>';
-	echo '<p>'.Form::label('enquiry','Your Message').Form::textarea('enquiry',Input::old('enquiry')).'</p>';
-	echo '<p>'.Form::submit('Send Message').'</p>';
-	echo Form::close();
-	?>
-
 	<footer>
 		<?=View::make('site.inc.footer')->render()?>
 	</footer>
