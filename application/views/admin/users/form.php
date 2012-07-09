@@ -91,10 +91,9 @@
                   <?=$role->name?>
                 </label>
               </div>
-            </div>
           <?
               }
-              echo '</fieldset>';
+              echo '</div></fieldset>';
             }
           ?>
           <div class="form-actions">
