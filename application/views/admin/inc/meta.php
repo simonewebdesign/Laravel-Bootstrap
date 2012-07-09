@@ -7,8 +7,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Koki Studio Dashboard">
-    <meta name="author" content="David Thorpe, Koki Studio">
+    <meta name="description" content="">
+    <meta name="author" content="<?=TECHNICAL_NAME, TECHNICAL_EMAIL?>">
 
     <!-- Le styles -->
     <link href="<?=asset('css/admin/bootstrap.css')?>" rel="stylesheet">

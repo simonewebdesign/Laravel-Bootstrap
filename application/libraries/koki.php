@@ -21,6 +21,24 @@ class Koki {
           return false;
      }
 
+	/**
+	 * Same as echoPre but uses Laravel's logging class
+	 *
+	 * @return void
+	 * @author David Thorpe
+	 */
+	public static function log($value,$type = 'info'){
+		$output = '';
+		if($value){
+				$output = '<pre>';
+				$output .= print_r($value, true);
+				$output .= '</pre><br />';
+				Log::write($type,$output);
+				return true;
+			}
+		return false;
+	}
+
      /**
       * Checks to see that a user is part of the role id
       * @param  object $user          Pass the $user object in here (Auth::user() or $this->data['user'])
@@ -29,6 +47,8 @@ class Koki {
       */
      public static function has_role($user = false, $role = false){
           if(!$user || !$role) return false;
+          if($user->is_admin) return true;
+          
           if($user->roles){
                foreach($user->roles as $usrrole){
                     if(is_numeric($role)){
@@ -54,6 +74,15 @@ class Koki {
                return true;
           }
           return false;
+     }
+
+     public static function to_dropdown($array = false,$key = false,$val = false){
+        if(!$array || !$key || !$val) return false;
+        $return = array();
+        foreach($array as $arr){
+          $return[$arr->$key] = $arr->$val;
+        }
+        return $return;
      }
 
 }

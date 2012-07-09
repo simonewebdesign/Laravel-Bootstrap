@@ -1,10 +1,12 @@
 <?php
 // Define some constants
 define('COMPANY_NAME','Company Name');
-define('CONTACT_EMAIL','davzie@davzie.com');
-define('CONTACT_NAME','David Thorpe');
+define('CONTACT_EMAIL','example@example.com');
+define('CONTACT_NAME','Example Name');
 
-define('TECHNICAL_EMAIL','davzie@davzie.com');
+define('TECHNICAL_NAME','Tech Name');
+define('TECHNICAL_EMAIL','example@example.com');
+define('ADMIN_TITLE','Bootstrap Backend');
 
 Route::get('admin/setup',function(){
 	if(Setup::setup_complete()){

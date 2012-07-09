@@ -1,4 +1,4 @@
-<?=View::make('admin.inc.meta')->render()?>
+<?=View::make('admin.inc.meta', get_defined_vars() )->render()?>
     <title>Setup Admin User</title>
   </head>
   <body>
@@ -54,6 +54,6 @@
           <?=Form::close()?>
     </div> <!-- /container -->
 
-    <?=View::make('admin.inc.scripts')->render()?>
+    <?=View::make('admin.inc.scripts', get_defined_vars() )->render()?>
   </body>
 </html>

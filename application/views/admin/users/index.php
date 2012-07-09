@@ -1,15 +1,15 @@
-<?=View::make('admin.inc.meta')->render()?>
-    <title>Koki Studio Dashboard</title>
+<?=View::make('admin.inc.meta', get_defined_vars() )->render()?>
+    <title><?=ADMIN_TITLE?></title>
   </head>
   <body>
-    <?=View::make('admin.inc.header')->render()?>
+    <?=View::make('admin.inc.header', get_defined_vars() )->render()?>
     <div class="container">
 
       <div class="row-fluid">
 
         <div class="span3"> <!-- Sidebar -->
           <div class="well">
-            <?=View::make('admin.inc.sidebar')->render()?>
+            <?=View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
           </div>
         </div> <!-- /Sidebar -->
 
@@ -66,7 +66,7 @@
         <?=Form::close()?>
       </div>
     </div>
-    <?=View::make('admin.inc.scripts')->render()?>
+    <?=View::make('admin.inc.scripts', get_defined_vars() )->render()?>
     <script>
       $('#delete_user').modal({
         show:false

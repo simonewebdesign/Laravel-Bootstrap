@@ -1,5 +1,5 @@
-<?=View::make('admin.inc.meta')->render()?>
-    <title>Login &lt; Koki Studio Dashboard</title>
+<?=View::make('admin.inc.meta', get_defined_vars() )->render()?>
+    <title>Login &lt; <?=ADMIN_TITLE?></title>
   </head>
   <body>
     <div class="container loginwindow">
@@ -23,6 +23,6 @@
           <?=Form::close()?>
     </div> <!-- /container -->
 
-    <?=View::make('admin.inc.scripts')->render()?>
+    <?=View::make('admin.inc.scripts', get_defined_vars() )->render()?>
   </body>
 </html>

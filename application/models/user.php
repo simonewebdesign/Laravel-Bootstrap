@@ -10,12 +10,6 @@ class User extends Eloquent {
 	{
 		$this->set_attribute('password', Hash::make($password));
 	}
-	public function get_created_at(){
-		return date('j-M-y H:i',strtotime($this->get_attribute('created_at')));
-	}
-	public function get_updated_at(){
-		return date('j-M-y H:i',strtotime($this->get_attribute('updated_at')));
-	}
 	public function get_fullname(){
 		return $this->get_attribute('first_name').' '.$this->get_attribute('last_name');
 	}

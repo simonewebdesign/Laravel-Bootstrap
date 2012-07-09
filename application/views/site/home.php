@@ -1,4 +1,4 @@
-<?=View::make('site.inc.meta')->render()?>
+<?=View::make('site.inc.meta', get_defined_vars() )->render()?>
   	<? if($page): ?>
 		<title><?=$page->title." &lt; ".$page->meta_title?></title>
 		<meta name="description" content="<?=$page->meta_description?>" />
@@ -28,8 +28,8 @@
 		}
 	?>
 	<footer>
-		<?=View::make('site.inc.footer')->render()?>
+		<?=View::make('site.inc.footer', get_defined_vars() )->render()?>
 	</footer>
-	<?=View::make('site.inc.scripts')->render()?>
+	<?=View::make('site.inc.scripts', get_defined_vars() )->render()?>
 </body>
 </html>

@@ -21,11 +21,12 @@ class Admin_Dash_Controller extends Admin_Controller
     }
 
     public function post_login(){
-    	if (Auth::attempt(Input::get('username'), Input::get('password')))
+        $credentials = array('username' => Input::get('username'), 'password' => Input::get('password'));
+    	if (Auth::attempt( $credentials ))
 		{
-		     return Redirect::to('admin/dashboard');
+		  return Redirect::to('admin/dashboard');
 		}else{
-            return Redirect::to('admin/login');
+          return Redirect::to('admin/login');
         }
     }
     

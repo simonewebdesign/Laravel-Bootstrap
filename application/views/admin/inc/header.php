@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<?=url('admin/dashboard')?>">Koki Dashboard</a>
+          <a class="brand" href="<?=url('admin/dashboard')?>"><?=ADMIN_TITLE?></a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="<?=( URI::is('admin/dashboard') ? 'active' : false )?>"><a href="<?=url('admin/dashboard')?>">Home</a></li>
