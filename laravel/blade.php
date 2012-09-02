@@ -95,7 +95,6 @@ class Blade {
 	 *
 	 * @param  string  $view
 	 * @param  string  $path
-	 * @param  string  $compiled
 	 * @return bool
 	 */
 	public static function expired($view, $path)
