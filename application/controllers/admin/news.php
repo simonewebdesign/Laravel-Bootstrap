@@ -57,11 +57,19 @@ class Admin_News_Controller extends Admin_Controller
             $article->created_by = $this->data['user']->id;
             $article->save();
 
-            $upload = Uploadr::upload('image','news',$article->id,true);
-            if($upload){
-                WideImage::load('./uploads/'.$upload->filename)->resize(200, 200)->saveToFile('./uploads/'.$upload->small_filename);
-                WideImage::load('./uploads/'.$upload->small_filename)->crop('center', 'center', 150, 150)->saveToFile('./uploads/'.$upload->thumb_filename);
-            }
+            $upload_details = array(
+                'upload_field_name'=>'image',
+                'upload_type'=>'news',
+                'upload_link_id'=>$article->id,
+                'remove_existing_for_link'=>true,
+                'title'=>$article->title,
+                'path_to_store'=>path('public').'uploads/',
+                'resizing'=>array(
+                    'small'=>array('w'=>200,'h'=>200),
+                    'thumb'=>array('w'=>150,'h'=>150)
+                )
+            );
+            $upload = Uploadr::upload($upload_details);
 
             Messages::add('success','News article added');
             return Redirect::to('admin/'.$this->views.'');
@@ -79,7 +87,7 @@ class Admin_News_Controller extends Admin_Controller
         if ($validation->fails())
         {
             Messages::add('error',$validation->errors->all());
-            return Redirect::to('admin/'.$this->views.'/edit')->with_input();
+            return Redirect::to('admin/'.$this->views.'/edit/'.Input::get('id'))->with_input();
         }else{
             $article = News::find(Input::get('id'));
             $article->title = Input::get('title');
@@ -87,16 +95,63 @@ class Admin_News_Controller extends Admin_Controller
             $article->content = Input::get('content');
             $article->save();
 
-            $upload = Uploadr::upload('image','news',$article->id,true);
-            if($upload){
-                WideImage::load('./uploads/'.$upload->filename)->resize(200, 200)->saveToFile('./uploads/'.$upload->small_filename);
-                WideImage::load('./uploads/'.$upload->small_filename)->crop('center', 'center', 150, 150)->saveToFile('./uploads/'.$upload->thumb_filename);
-            }
+            $upload_details = array(
+                'upload_field_name'=>'image',
+                'upload_type'=>'news',
+                'upload_link_id'=>$article->id,
+                'remove_existing_for_link'=>false,
+                'title'=>$article->title,
+                'path_to_store'=>path('public').'uploads/',
+                'resizing'=>array(
+                    'small'=>array('w'=>200,'h'=>200),
+                    'thumb'=>array('w'=>150,'h'=>150)
+                )
+            );
+            $upload = Uploadr::upload($upload_details);
 
             Messages::add('success','News article saved');
-            return Redirect::to('admin/'.$this->views.'');
+            return Redirect::to('admin/'.$this->views.'/edit/'.Input::get('id'));
         }
     }
+
+/**
+     * Update the order of the returned image IDs
+     * @return boolean
+     */
+    public function post_update_images_order(){
+        $decoded = json_decode(Input::get('data'));
+        if($decoded){
+            foreach($decoded as $order=>$id){
+                if($img = Upload::find($id)){
+                    $img->order = $order;
+                    $img->save();
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Delete an upload from a section
+     * @return [type] [description]
+     */
+    public function post_delete_upload(){
+        $in = explode('-',Input::get('id'));
+        if($in && count($in) == 2){
+            $object_id = $in[0];
+            $object_upload_id = $in[1];
+            $object = News::find($object_id);
+            if($object){
+                $upload = $object->uploads()->where('id','=',$object_upload_id);
+                if($upload){
+                    Uploadr::remove_singular($object_upload_id);
+                    return Redirect::to('admin/'.$this->views.'/edit/'.$object_id);
+                }
+            }
+        }
+        return Redirect::to('admin/'.$this->views);
+    }
+
 
     /**
      * Our news article create function

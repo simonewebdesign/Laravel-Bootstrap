@@ -64,6 +64,7 @@ class Setup {
 			$table->string('extension',10);
 			$table->integer('user_id');
 			$table->integer('image');
+			$table->integer('order');
 			$table->index('link_type');
 			$table->index('link_id');
 			$table->index('user_id');

@@ -5,6 +5,13 @@ class Admin_Images_Controller extends Admin_Controller
     public $restful = true;
     public $views = 'images';
 
+    public function __construct(){
+        parent::__construct();
+        $this->upload_path = path('public').'uploads/';
+        $this->upload_small = array('w'=>200,'h'=>200);
+        $this->upload_thumb = array('w'=>150,'h'=>150);
+    }
+
     public function get_index()
     {
     	$this->data['galleries'] = Gallery::order_by('title','asc')->get();
@@ -65,12 +72,20 @@ class Admin_Images_Controller extends Admin_Controller
             $image->created_by = $this->data['user']->id;
             $image->gallery_id = Input::get('gallery_id');
             $image->save();
-            
-            $upload = Uploadr::upload('image','image',$image->id,true);
-            if($upload){
-                WideImage::load('./uploads/'.$upload->filename)->resize(200, 200)->saveToFile('./uploads/'.$upload->small_filename);
-                WideImage::load('./uploads/'.$upload->small_filename)->crop('center', 'center', 150, 150)->saveToFile('./uploads/'.$upload->thumb_filename);
-            }
+
+            $upload_details = array(
+                'upload_field_name'=>'image',
+                'upload_type'=>'image',
+                'upload_link_id'=>$image->id,
+                'remove_existing_for_link'=>true,
+                'title'=>$image->title,
+                'path_to_store'=>path('public').'uploads/',
+                'resizing'=>array(
+                    'small'=>array('w'=>200,'h'=>200),
+                    'thumb'=>array('w'=>150,'h'=>150)
+                )
+            );
+            $upload = Uploadr::upload($upload_details);
 
             Messages::add('success','Image Added');
             return Redirect::to('admin/'.$this->views.'');
@@ -112,15 +127,61 @@ class Admin_Images_Controller extends Admin_Controller
             $image->gallery_id = Input::get('gallery_id');
             $image->save();
 
-            $upload = Uploadr::upload('image','image',$image->id,true);
-            if($upload){
-                WideImage::load('./uploads/'.$upload->filename)->resize(200, 200)->saveToFile('./uploads/'.$upload->small_filename);
-                WideImage::load('./uploads/'.$upload->small_filename)->crop('center', 'center', 150, 150)->saveToFile('./uploads/'.$upload->thumb_filename);
-            }
+            $upload_details = array(
+                'upload_field_name'=>'image',
+                'upload_type'=>'image',
+                'upload_link_id'=>$image->id,
+                'remove_existing_for_link'=>true,
+                'title'=>$image->title,
+                'path_to_store'=>path('public').'uploads/',
+                'resizing'=>array(
+                    'small'=>array('w'=>200,'h'=>200),
+                    'thumb'=>array('w'=>150,'h'=>150)
+                )
+            );
+            $upload = Uploadr::upload($upload_details);
 
             Messages::add('success','Image Saved');
             return Redirect::to('admin/'.$this->views.'');
         }
+    }
+
+/**
+     * Update the order of the returned image IDs
+     * @return boolean
+     */
+    public function post_update_images_order(){
+        $decoded = json_decode(Input::get('data'));
+        if($decoded){
+            foreach($decoded as $order=>$id){
+                if($img = Upload::find($id)){
+                    $img->order = $order;
+                    $img->save();
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Delete an upload from a section
+     * @return [type] [description]
+     */
+    public function post_delete_upload(){
+        $in = explode('-',Input::get('id'));
+        if($in && count($in) == 2){
+            $object_id = $in[0];
+            $object_upload_id = $in[1];
+            $object = Image::find($object_id);
+            if($object){
+                $upload = $object->uploads()->where('id','=',$object_upload_id);
+                if($upload){
+                    Uploadr::remove_singular($object_upload_id);
+                    return Redirect::to('admin/'.$this->views.'/edit/'.$object_id);
+                }
+            }
+        }
+        return Redirect::to('admin/'.$this->views);
     }
 
     public function get_create(){

@@ -67,12 +67,20 @@ class Admin_Sections_Controller extends Admin_Controller
             $section->created_by = $this->data['user']->id;
             $section->page_id = Input::get('page_id');
             $section->save();
-            
-            $upload = Uploadr::upload('image','section',$section->id,true);
-            if($upload){
-                WideImage::load('./uploads/'.$upload->filename)->resize(200, 200)->saveToFile('./uploads/'.$upload->small_filename);
-                WideImage::load('./uploads/'.$upload->small_filename)->crop('center', 'center', 150, 150)->saveToFile('./uploads/'.$upload->thumb_filename);
-            }
+
+            $upload_details = array(
+                'upload_field_name'=>'image',
+                'upload_type'=>'section',
+                'upload_link_id'=>$section->id,
+                'remove_existing_for_link'=>true,
+                'title'=>$section->title,
+                'path_to_store'=>path('public').'uploads/',
+                'resizing'=>array(
+                    'small'=>array('w'=>200,'h'=>200),
+                    'thumb'=>array('w'=>150,'h'=>150)
+                )
+            );
+            $upload = Uploadr::upload($upload_details);
 
             Messages::add('success','Section Added');
             return Redirect::to('admin/'.$this->views.'');
@@ -99,15 +107,61 @@ class Admin_Sections_Controller extends Admin_Controller
             $section->page_id = Input::get('page_id');
             $section->save();
 
-            $upload = Uploadr::upload('image','section',$section->id,true);
-            if($upload){
-                WideImage::load('./uploads/'.$upload->filename)->resize(200, 200)->saveToFile('./uploads/'.$upload->small_filename);
-                WideImage::load('./uploads/'.$upload->small_filename)->crop('center', 'center', 150, 150)->saveToFile('./uploads/'.$upload->thumb_filename);
-            }
+            $upload_details = array(
+                'upload_field_name'=>'image',
+                'upload_type'=>'section',
+                'upload_link_id'=>$section->id,
+                'remove_existing_for_link'=>false,
+                'title'=>$section->title,
+                'path_to_store'=>path('public').'uploads/',
+                'resizing'=>array(
+                    'small'=>array('w'=>200,'h'=>200),
+                    'thumb'=>array('w'=>150,'h'=>150)
+                )
+            );
+            $upload = Uploadr::upload($upload_details);
 
             Messages::add('success','Section Saved');
-            return Redirect::to('admin/'.$this->views.'');
+            return Redirect::to('admin/'.$this->views.'/edit/'.Input::get('id'));
         }
+    }
+
+    /**
+     * Update the order of the returned image IDs
+     * @return boolean
+     */
+    public function post_update_images_order(){
+        $decoded = json_decode(Input::get('data'));
+        if($decoded){
+            foreach($decoded as $order=>$id){
+                if($img = Upload::find($id)){
+                    $img->order = $order;
+                    $img->save();
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Delete an upload from a section
+     * @return [type] [description]
+     */
+    public function post_delete_upload(){
+        $in = explode('-',Input::get('id'));
+        if($in && count($in) == 2){
+            $object_id = $in[0];
+            $object_upload_id = $in[1];
+            $object = Cmssection::find($object_id);
+            if($object){
+                $upload = $object->uploads()->where('id','=',$object_upload_id);
+                if($upload){
+                    Uploadr::remove_singular($object_upload_id);
+                    return Redirect::to('admin/'.$this->views.'/edit/'.$object_id);
+                }
+            }
+        }
+        return Redirect::to('admin/'.$this->views);
     }
 
     public function get_create(){
