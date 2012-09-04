@@ -3,7 +3,7 @@ class News extends Eloquent {
      public static $timestamps = true;
      public function user()
      {
-          return $this->belongs_to('User','user_id');
+          return $this->belongs_to('User','created_by');
      }
      public function uploads()
      {
