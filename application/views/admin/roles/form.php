@@ -52,6 +52,7 @@
             <a class="btn" href="<?=url('admin/roles')?>">Go Back</a>
             <input type="submit" class="btn btn-primary" value="<?=($create ? 'Create Role' : 'Save Role')?>" />
           </div>
+          <?=Form::close()?>
         </div>
 
       </div>

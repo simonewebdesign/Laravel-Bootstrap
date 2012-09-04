@@ -80,6 +80,7 @@
             <a class="btn" href="<?=url('admin/images')?>">Go Back</a>
             <input type="submit" class="btn btn-primary" value="<?=($create ? 'Create Image' : 'Save Image')?>" />
           </div>
+          <?=Form::close()?>
         </div>
 
       </div>

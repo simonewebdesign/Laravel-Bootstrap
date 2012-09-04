@@ -59,6 +59,7 @@
             <a class="btn" href="<?=url('admin/pages')?>">Go Back</a>
             <input type="submit" class="btn btn-primary" value="<?=($create ? 'Create Page' : 'Save Page')?>" />
           </div>
+          <?=Form::close()?>
         </div>
 
       </div>

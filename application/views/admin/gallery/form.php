@@ -42,6 +42,7 @@
             <a class="btn" href="<?=url('admin/gallery')?>">Go Back</a>
             <input type="submit" class="btn btn-primary" value="<?=($create ? 'Create Gallery' : 'Save Gallery')?>" />
           </div>
+          <?=Form::close()?>
         </div>
 
       </div>

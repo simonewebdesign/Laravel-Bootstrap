@@ -100,6 +100,7 @@
             <a class="btn" href="<?=url('admin/users')?>">Go Back</a>
             <input type="submit" class="btn btn-primary" value="<?=($create ? 'Create User' : 'Save User')?>" />
           </div>
+          <?=Form::close()?>
         </div>
 
       </div>
