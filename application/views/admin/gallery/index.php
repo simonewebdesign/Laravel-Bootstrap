@@ -17,7 +17,7 @@
           <h1>Galleries</h1>
           <p>You can create your galleries here.</p>
           <?php echo Messages::get_html()?>
-          <?
+          <?php
             if($galleries){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>
@@ -41,7 +41,7 @@
             }else{
           ?>
             <div class="well">No galleries today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
           <a href="<?php echo action('admin.gallery@create')?>" class="btn btn-primary right">New Gallery</a>

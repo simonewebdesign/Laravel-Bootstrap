@@ -17,7 +17,7 @@
           <h1><?php echo ( $create ? 'New User' : 'Edit User' )?></h1>
           <?php echo Messages::get_html()?>
           <?php echo Form::open_for_files('admin/users/'.( $create ? 'create' : 'edit' ), 'POST', array('class'=>'form-horizontal'));?>
-          <? if(!$create): ?> <input type="hidden" name="id" value="<?php echo $user->id?>" /> <? endif; ?>
+          <?php if(!$create): ?> <input type="hidden" name="id" value="<?php echo $user->id?>" /> <?php endif; ?>
            
           <fieldset>
             <legend>Basic Information</legend>
@@ -79,7 +79,7 @@
 
           </fieldset>
 
-          <?
+          <?php
             if($roles){
               echo '<fieldset><legend>Roles</legend><div class="control-group">';
               echo Form::label('user_list', ( $create ? 'User\'s Roles' : $user->first_name.'\'s Roles' ), array('class'=>'control-label'));
@@ -91,7 +91,7 @@
                   <?php echo $role->name?>
                 </label>
               </div>
-          <?
+          <?php
               }
               echo '</div></fieldset>';
             }

@@ -17,7 +17,7 @@
           <h1><?php echo ( $create ? 'New Gallery' : 'Edit Gallery' )?></h1>
           <?php echo Messages::get_html()?>
           <?php echo Form::open('admin/gallery/'.( $create ? 'create' : 'edit' ), 'POST', array('class'=>'form-horizontal'));?>
-          <? if(!$create): ?> <input type="hidden" name="id" value="<?php echo $gallery->id?>" /> <? endif; ?>
+          <?php if(!$create): ?> <input type="hidden" name="id" value="<?php echo $gallery->id?>" /> <?php endif; ?>
            
           <fieldset>
             <legend>Basic Information</legend>

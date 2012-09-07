@@ -17,7 +17,7 @@
           <h1><?php echo ( $create ? 'New Role' : 'Edit Role' )?></h1>
           <?php echo Messages::get_html()?>
           <?php echo Form::open('admin/roles/'.( $create ? 'create' : 'edit' ), 'POST', array('class'=>'form-horizontal'));?>
-          <? if(!$create): ?> <input type="hidden" name="id" value="<?php echo $role->id?>" /> <? endif; ?>
+          <?php if(!$create): ?> <input type="hidden" name="id" value="<?php echo $role->id?>" /> <?php endif; ?>
            
           <fieldset>
             <legend>Basic Information</legend>
@@ -29,7 +29,7 @@
               </div>
             </div>
           </fieldset>
-          <?
+          <?php
             if($users){
               echo '<fieldset><legend>Users Assigned To This Role</legend><div class="control-group">';
               echo Form::label('user_list','Role\'s Users', array('class'=>'control-label'));
@@ -42,7 +42,7 @@
                 </label>
               </div>
             </div>
-          <?
+          <?php
               }
               echo '</fieldset>';
             }

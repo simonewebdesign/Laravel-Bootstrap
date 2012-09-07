@@ -17,7 +17,7 @@
           <h1>News Articles</h1>
           <p>You can use this control panel to administer certain aspects of your website. If you get stuck there will always be a Help &amp; Support Button in the sidebar to the left.</p>
           <?php echo Messages::get_html()?>
-          <?
+          <?php
             if($news){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>
@@ -43,7 +43,7 @@
             }else{
           ?>
             <div class="well">No news articles today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
           <a href="<?php echo action('admin.news@create')?>" class="btn btn-primary right">New Article</a>

@@ -17,7 +17,7 @@
           <h1>Images</h1>
           <p>You can create your images here.</p>
           <?php echo Messages::get_html()?>
-          <?
+          <?php
             if($galleries){
               foreach($galleries as $gallery){
                 echo '<h2>'.$gallery->title.'</h2>';
@@ -47,7 +47,7 @@
             }else{
           ?>
             <div class="well">No galleries today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
           <a href="<?php echo action('admin.images@create')?>" class="btn btn-primary right">New Image</a>

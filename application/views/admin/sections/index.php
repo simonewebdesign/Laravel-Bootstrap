@@ -17,7 +17,7 @@
           <h1>CMS Sections</h1>
           <p>The CMS allows basic editing of sections throughout the website. Each page can have multiple "sections" which provides a very flexible method of editing virtually any content block on the website. For now, pages are manageable through the database directly so as not to lose content through accidental deletion.</p>
           <?php echo Messages::get_html()?>
-          <?
+          <?php
             if($sections){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>
@@ -43,7 +43,7 @@
             }else{
           ?>
             <div class="well">No sections today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
           <a href="<?php echo action('admin.sections@create')?>" class="btn btn-primary right">New Section</a>

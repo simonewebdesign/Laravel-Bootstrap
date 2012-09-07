@@ -17,7 +17,7 @@
           <h1>CMS Users</h1>
           <p>Use the table below to edit the users in the system.</p>
           <?php echo Messages::get_html()?>
-          <?
+          <?php
             if($users){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>

@@ -17,7 +17,7 @@
           <h1><?php echo ( $create ? 'New Page' : 'Edit Page' )?></h1>
           <?php echo Messages::get_html()?>
           <?php echo Form::open('admin/pages/'.( $create ? 'create' : 'edit' ), 'POST', array('class'=>'form-horizontal'));?>
-          <? if(!$create): ?> <input type="hidden" name="id" value="<?php echo $page->id?>" /> <? endif; ?>
+          <?php if(!$create): ?> <input type="hidden" name="id" value="<?php echo $page->id?>" /> <?php endif; ?>
            
           <fieldset>
             <legend>Basic Information</legend>

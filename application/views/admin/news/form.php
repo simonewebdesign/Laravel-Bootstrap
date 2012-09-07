@@ -17,7 +17,7 @@
           <h1><?php echo ( $create ? 'New Article' : 'Edit Article' )?></h1>
           <?php echo Messages::get_html()?>
           <?php echo Form::open_for_files('admin/news/'.( $create ? 'create' : 'edit' ), 'POST', array('class'=>'form-horizontal'));?>
-          <? if(!$create): ?> <input type="hidden" name="id" value="<?php echo $article->id?>" /> <? endif; ?>
+          <?php if(!$create): ?> <input type="hidden" name="id" value="<?php echo $article->id?>" /> <?php endif; ?>
            
           <fieldset>
             <legend>Basic Information</legend>
@@ -48,12 +48,12 @@
               </div>
             </div>
           </fieldset>
-          <?
+          <?php
             if(!$create && $article->uploads){
           ?>
           <fieldset><legend>Manage Current Images</legend>
           <ul class="thumbnails">
-            <? foreach($article->uploads()->order_by('order','asc')->get() as $upload){ ?>
+            <?php foreach($article->uploads()->order_by('order','asc')->get() as $upload){ ?>
               <li class="span3" rel="<?php echo $upload->id?>">
                 <div class="thumbnail">
                   <img src="<?php echo asset('uploads/'.$upload->small_filename)?>" alt="">
@@ -64,10 +64,10 @@
                   </div>
                 </div>
               </li>
-            <? } ?>
+            <?php } ?>
           </ul>
           </fieldset>
-          <? } ?>
+          <?php } ?>
 
 
           <div class="form-actions">
@@ -82,7 +82,7 @@
     </div> <!-- /container -->
 
     <?php echo View::make('admin.inc.scripts', get_defined_vars() )->render()?>
-    <? if(!$create): ?>
+    <?php if(!$create): ?>
       <div class="modal hide fade" id="delete_image">
         <div class="modal-header">
           <a class="close" data-dismiss="modal">×</a>
@@ -127,6 +127,6 @@
             });
         });
       </script>
-    <? endif; ?>
+    <?php endif; ?>
   </body>
 </html>

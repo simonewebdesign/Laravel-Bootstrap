@@ -17,7 +17,7 @@
           <h1>CMS Pages</h1>
           <p>You can define pages here that can have sections associated with them.</p>
           <?php echo Messages::get_html()?>
-          <?
+          <?php
             if($pages){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>
@@ -41,7 +41,7 @@
             }else{
           ?>
             <div class="well">No pages today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
           <a href="<?php echo action('admin.pages@create')?>" class="btn btn-primary right">New Page</a>

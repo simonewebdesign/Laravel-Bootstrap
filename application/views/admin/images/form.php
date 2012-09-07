@@ -17,7 +17,7 @@
           <h1><?php echo ( $create ? 'New Image' : 'Edit Image' )?></h1>
           <?php echo Messages::get_html()?>
           <?php echo Form::open_for_files('admin/images/'.( $create ? 'create' : 'edit' ), 'POST', array('class'=>'form-horizontal'));?>
-          <? if(!$create): ?> <input type="hidden" name="id" value="<?php echo $image->id?>" /> <? endif; ?>
+          <?php if(!$create): ?> <input type="hidden" name="id" value="<?php echo $image->id?>" /> <?php endif; ?>
            
           <fieldset>
             <legend>Basic Information</legend>
@@ -25,7 +25,7 @@
             <div class="control-group">
               <?php echo Form::label('gallery_id', 'Belongs To Gallery',array('class'=>'control-label'))?>
               <div class="controls">
-                <?
+                <?php
                 $dataset[''] = 'Please Select A Gallery';
                 if($galleries){
                   foreach($galleries as $gallery){
@@ -57,11 +57,11 @@
                 </div>
               </div>
               <div class="span3">
-                <?
+                <?php
                   if(!$create && $image->uploads){
                 ?>
                 <ul class="thumbnails">
-                  <? foreach($image->uploads as $upload){ ?>
+                  <?php foreach($image->uploads as $upload){ ?>
                   <li>
                     <div class="thumbnail">
                       <img src="<?php echo asset('uploads/'.$upload->small_filename)?>" alt="">
@@ -71,9 +71,9 @@
                       </div>
                     </div>
                   </li>
-                  <? } ?>
+                  <?php } ?>
                 </ul>
-                <? } ?>
+                <?php } ?>
               </div>
           </fieldset>
           <div class="form-actions">
