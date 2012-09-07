@@ -1,23 +1,23 @@
-<?=View::make('admin.inc.meta', get_defined_vars() )->render()?>
-    <title><?=ADMIN_TITLE?></title>
+<?php echo View::make('admin.inc.meta', get_defined_vars() )->render()?>
+    <title><?php echo ADMIN_TITLE?></title>
   </head>
   <body>
-    <?=View::make('admin.inc.header', get_defined_vars() )->render()?>
+    <?php echo View::make('admin.inc.header', get_defined_vars() )->render()?>
     <div class="container">
 
       <div class="row-fluid">
 
         <div class="span3"> <!-- Sidebar -->
           <div class="well">
-            <?=View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
+            <?php echo View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
           </div>
         </div> <!-- /Sidebar -->
 
         <div class="span9">
           <h1>CMS Pages</h1>
           <p>You can define pages here that can have sections associated with them.</p>
-          <?=Messages::get_html()?>
-          <?
+          <?php echo Messages::get_html()?>
+          <?php
             if($pages){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>
@@ -41,10 +41,10 @@
             }else{
           ?>
             <div class="well">No pages today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
-          <a href="<?=action('admin.pages@create')?>" class="btn btn-primary right">New Page</a>
+          <a href="<?php echo action('admin.pages@create')?>" class="btn btn-primary right">New Page</a>
         </div>
 
       </div>
@@ -59,14 +59,14 @@
         <p>Are you sure you want to delete this page?</p>
       </div>
       <div class="modal-footer">
-        <?=Form::open('admin/pages/delete', 'POST')?>
+        <?php echo Form::open('admin/pages/delete', 'POST')?>
         <a data-toggle="modal" href="#delete_page" class="btn">Keep</a>
         <input type="hidden" name="id" id="postvalue" value="" />
         <input type="submit" class="btn btn-danger" value="Delete" />
-        <?=Form::close()?>
+        <?php echo Form::close()?>
       </div>
     </div>
-    <?=View::make('admin.inc.scripts', get_defined_vars() )->render()?>
+    <?php echo View::make('admin.inc.scripts', get_defined_vars() )->render()?>
     <script>
       $('#delete_page').modal({
         show:false

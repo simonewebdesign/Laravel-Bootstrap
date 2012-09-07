@@ -1,23 +1,23 @@
-<?=View::make('admin.inc.meta', get_defined_vars() )->render()?>
-    <title><?=ADMIN_TITLE?></title>
+<?php echo View::make('admin.inc.meta', get_defined_vars() )->render()?>
+    <title><?php echo ADMIN_TITLE?></title>
   </head>
   <body>
-    <?=View::make('admin.inc.header', get_defined_vars() )->render()?>
+    <?php echo View::make('admin.inc.header', get_defined_vars() )->render()?>
     <div class="container">
 
       <div class="row-fluid">
 
         <div class="span3"> <!-- Sidebar -->
           <div class="well">
-            <?=View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
+            <?php echo View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
           </div>
         </div> <!-- /Sidebar -->
 
         <div class="span9">
           <h1>News Articles</h1>
           <p>You can use this control panel to administer certain aspects of your website. If you get stuck there will always be a Help &amp; Support Button in the sidebar to the left.</p>
-          <?=Messages::get_html()?>
-          <?
+          <?php echo Messages::get_html()?>
+          <?php
             if($news){
               echo '<table class="table table-striped table-bordered table-condensed">
               <thead>
@@ -43,10 +43,10 @@
             }else{
           ?>
             <div class="well">No news articles today. Why not create one using the button below.</div>
-          <?
+          <?php
             }
           ?>
-          <a href="<?=action('admin.news@create')?>" class="btn btn-primary right">New Article</a>
+          <a href="<?php echo action('admin.news@create')?>" class="btn btn-primary right">New Article</a>
         </div>
 
       </div>
@@ -61,14 +61,14 @@
         <p>Are you sure you want to delete this post?</p>
       </div>
       <div class="modal-footer">
-        <?=Form::open('admin/news/delete', 'POST')?>
+        <?php echo Form::open('admin/news/delete', 'POST')?>
         <a data-toggle="modal" href="#delete_article" class="btn">Keep</a>
         <input type="hidden" name="id" id="postvalue" value="" />
         <input type="submit" class="btn btn-danger" value="Delete" />
-        <?=Form::close()?>
+        <?php echo Form::close()?>
       </div>
     </div>
-    <?=View::make('admin.inc.scripts', get_defined_vars() )->render()?>
+    <?php echo View::make('admin.inc.scripts', get_defined_vars() )->render()?>
     <script>
       $('#delete_article').modal({
         show:false
