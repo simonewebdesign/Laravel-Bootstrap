@@ -1,15 +1,15 @@
-<?=View::make('admin.inc.meta', get_defined_vars() )->render()?>
-    <title><?=ADMIN_TITLE?></title>
+<?php echo View::make('admin.inc.meta', get_defined_vars() )->render()?>
+    <title><?php echo ADMIN_TITLE?></title>
   </head>
   <body>
-    <?=View::make('admin.inc.header', get_defined_vars() )->render()?>
+    <?php echo View::make('admin.inc.header', get_defined_vars() )->render()?>
     <div class="container">
 
       <div class="row-fluid">
 
         <div class="span3"> <!-- Sidebar -->
           <div class="well">
-            <?=View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
+            <?php echo View::make('admin.inc.sidebar', get_defined_vars() )->render()?>
           </div>
         </div> <!-- /Sidebar -->
 
@@ -21,10 +21,10 @@
       </div>
       <div class="row-fluid">
         <div class="span12">
-          <p>You are logged in as: <?=$user->username?></p>
+          <p>You are logged in as: <?php echo $user->username?></p>
         </div>
       </div>
     </div> <!-- /container -->
-    <?=View::make('admin.inc.scripts', get_defined_vars() )->render()?>
+    <?php echo View::make('admin.inc.scripts', get_defined_vars() )->render()?>
   </body>
 </html>

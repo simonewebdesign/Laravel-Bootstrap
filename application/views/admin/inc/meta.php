@@ -8,19 +8,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="<?=TECHNICAL_NAME, TECHNICAL_EMAIL?>">
+    <meta name="author" content="<?php echo TECHNICAL_NAME, TECHNICAL_EMAIL?>">
 
     <!-- Le styles -->
-    <link href="<?=asset('css/admin/bootstrap.css')?>" rel="stylesheet">
+    <link href="<?php echo asset('css/admin/bootstrap.css')?>" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
-    <link href="<?=asset('css/admin/bootstrap-responsive.css')?>" rel="stylesheet">
+    <link href="<?php echo asset('css/admin/bootstrap-responsive.css')?>" rel="stylesheet">
     <!-- Call our own stylesheets -->
-    <link href="<?=asset('css/admin/style.css')?>" rel="stylesheet">
-    <link href="<?=asset('css/admin/wysiwyg.css')?>" rel="stylesheet">
+    <link href="<?php echo asset('css/admin/style.css')?>" rel="stylesheet">
+    <link href="<?php echo asset('css/admin/wysiwyg.css')?>" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -28,4 +28,4 @@
     <![endif]-->
 
     <!-- Le fav icons -->
-    <link rel="shortcut icon" href="<?=asset('favicon.ico')?>">
+    <link rel="shortcut icon" href="<?php echo asset('favicon.ico')?>">

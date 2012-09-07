@@ -8,8 +8,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="shortcut icon" href="<?=asset('favicon.ico')?>">
-  <link rel="stylesheet" href="<?=asset('css/reset.css')?>">
-  <link rel="stylesheet/less" type="text/css" href="<?=asset('css/style.less')?>">
-  <link rel="stylesheet" href="<?=asset('css/shadowbox.css')?>">
+  <link rel="shortcut icon" href="<?php echo asset('favicon.ico')?>">
+  <link rel="stylesheet" href="<?php echo asset('css/reset.css')?>">
+  <link rel="stylesheet/less" type="text/css" href="<?php echo asset('css/style.less')?>">
+  <link rel="stylesheet" href="<?php echo asset('css/shadowbox.css')?>">
   <script src="js/modernizr.js"></script>
