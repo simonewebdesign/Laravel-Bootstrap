@@ -65,8 +65,10 @@ class Admin_Pages_Controller extends Admin_Controller
             $page->meta_title = Input::get('meta_title');
             $page->meta_keywords = Input::get('meta_keywords');
             $page->save();
-            
             Messages::add('success','Page Added');
+            # creating the View
+            fopen("application/views/site/{$page->slug}.php", 'w') or Messages::add('error','View not created');
+
             return Redirect::to('admin/'.$this->views.'');
         }
     }
